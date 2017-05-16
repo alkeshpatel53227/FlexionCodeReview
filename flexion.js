@@ -21,22 +21,28 @@ app.controller('flexionCtrl', function($scope) {
     }
     $scope.calculateTriangle = function() {
         $scope.calculationResult = "";
+        //Populate the values from input as numbers
         var firstVal = Number($scope.firstValue).toFixed(2);
         var secondVal = Number($scope.secondValue).toFixed(2);
         var thirdVal = Number($scope.thirdValue).toFixed(2);
+        //Clear the canvas 
         var canvas = document.getElementById('triangle');
         var context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
+        //Check for valid values
         if($scope.firstValue != null && Number(firstVal) > 0 && 
                $scope.secondValue != null && Number(secondVal) > 0 && 
                $scope.thirdValue != null && Number(thirdVal) > 0 ){
+            //Check For All Equal Sides
             if(firstVal == secondVal  && secondVal == thirdVal){
                 $scope.calculationResult = "Your triangle is Equilateral.";
                 drawTriangle(firstVal,secondVal,thirdVal);
+                //Check for Valid values for sides to form triangle
             }else if(((Number(thirdVal) >= Number(firstVal)) && (Number(thirdVal) >= Number(secondVal)) && ((Number(firstVal) + Number(secondVal)) >= thirdVal)) ||
                     ((Number(secondVal) >= Number(firstVal)) && (Number(secondVal) >= Number(thirdVal)) && ((Number(firstVal) + Number(thirdVal)) >= secondVal)) ||
                     ((Number(firstVal) >= Number(secondVal)) && (Number(firstVal) >= Number(thirdVal)) && ((Number(thirdVal) + Number(secondVal)) >= firstVal))){
-                    if(Number(firstVal) == Number(secondVal) || Number(secondVal) == Number(thirdVal) || Number(thirdVal) == Number(firstVal)){
+                //Check for Valid values for two sides are equal    
+                if(Number(firstVal) == Number(secondVal) || Number(secondVal) == Number(thirdVal) || Number(thirdVal) == Number(firstVal)){
                         $scope.calculationResult = "Your triangle is Isosceles.";
                         drawTriangle(firstVal,secondVal,thirdVal);
                     }else{
@@ -52,6 +58,7 @@ app.controller('flexionCtrl', function($scope) {
         
     }
 });
+
 
 function drawTriangle(fVal, sVal, tval){
 var canvas = document.getElementById('triangle');
